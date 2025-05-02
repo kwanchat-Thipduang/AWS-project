@@ -1,0 +1,27 @@
+  .navbar {
+    text-align: center;
+    margin: 30px auto 20px auto;
+    padding: 10px 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: fit-content;
+}
+
+  .nav-link {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #005b99;
+    font-weight: bold;
+}
+
+  .nav-link.active {
+    color: #333;
+    background-color: #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+  .nav-link:hover {
+    text-decoration: underline;
+}

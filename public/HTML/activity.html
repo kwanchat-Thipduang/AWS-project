@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SkillSync - Add Activity</title>
+  <link rel="stylesheet" href="../CSS/activity.css">
+  <link rel="stylesheet" href="../CSS/selection.css"> <!-- ลิงก์ไปไฟล์ CSS -->
+</head>
+<body>
+
+<div class="form-container">
+  <h2>เพิ่มข้อมูลกิจกรรม</h2>
+  
+  <form id="activityForm">
+    <input type="text" id="activityName" placeholder="ชื่อกิจกรรม" required>
+    <input type="date" id="activityDate" placeholder="วันที่จัดกิจกรรม" required>
+    <input type="text" id="organizer" placeholder="หน่วยงานที่จัด" required>
+    <textarea id="skillsGained" placeholder="ทักษะที่ได้รับ เช่น Leadership, Teamwork" rows="3" required></textarea>
+    <input type="number" id="hours" placeholder="จำนวนชั่วโมงกิจกรรม" required>
+    
+    <button type="submit">บันทึกกิจกรรม</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('activityForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('ข้อมูลถูกส่งเรียบร้อย (ยังไม่ได้เชื่อมกับ S3)');
+    // ตรงนี้จะต่อ JavaScript อัปโหลดข้อมูลเข้า S3 ได้
+  });
+</script>
+
+</body>
+<nav style="text-align: center; margin-bottom: 30px; margin-top: 20px;">
+  <a href="../HTML/student.html" class="nav-link" id="nav-student">🏠 Dashboard</a>
+  <a href="../HTML/activity.html" class="nav-link" id="nav-activity">➕ เพิ่มกิจกรรม</a>
+  <a href="../HTML/studentview.html" class="nav-link" id="nav-view">📥 รออนุมัติ</a> 
+  <a href="../HTML/index.html" class="nav-link" id="nav-index">🎯 แนะนำ</a>
+</nav>
+<script>
+  const current = window.location.pathname.split("/").pop();
+  if (current.includes("student.html")) {
+    document.getElementById("nav-student").classList.add("active");
+  } else if (current.includes("activity.html")) {
+    document.getElementById("nav-activity").classList.add("active");
+  } else if (current.includes("studentview.html")) {
+    document.getElementById("nav-view").classList.add("active");
+  } else if (current.includes("review.html")) {
+    document.getElementById("nav-review").classList.add("active");
+  } else if (current.includes("index.html")) {
+    document.getElementById("nav-index").classList.add("active");
+  }
+</script>
+</html>

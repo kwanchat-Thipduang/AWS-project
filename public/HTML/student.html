@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SkillSync - Student Dashboard</title>
+  <link rel="stylesheet" href="../CSS/student.css">
+  <link rel="stylesheet" href="../CSS/selection.css">
+</head>
+<body>
+
+<header>
+  <h1>SkillSync: Student Dashboard</h1>
+  <p>ติดตามความก้าวหน้าทักษะและกิจกรรมที่คุณเข้าร่วม</p>
+
+  <div style="margin-top: 20px;">
+    <a href="index.html" class="btn-back">🔙 กลับไปหน้ากิจกรรมแนะนำ</a>
+  </div>
+</header>
+
+<section>
+  <h2>🎯 สรุปกิจกรรมที่เข้าร่วม</h2>
+  <table id="activityTable">
+    <thead>
+      <tr>
+        <th>ชื่อกิจกรรม</th>
+        <th>วันที่</th>
+        <th>หน่วยงาน</th>
+        <th>ทักษะที่ได้</th>
+        <th>ชั่วโมง</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- รายการกิจกรรมจะแสดงที่นี่ -->
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>➕ เพิ่มกิจกรรมใหม่</h2>
+
+  <form id="activityForm">
+    <input type="text" id="activityName" placeholder="ชื่อกิจกรรม" required>
+    <input type="date" id="activityDate" required>
+    <input type="text" id="organizer" placeholder="หน่วยงานที่จัด" required>
+    <input type="text" id="skillsGained" placeholder="ทักษะที่ได้รับ เช่น Leadership, Teamwork" required>
+    <input type="number" id="hours" placeholder="จำนวนชั่วโมง" required>
+    <button type="submit">เพิ่มกิจกรรม</button>
+  </form>
+</section>
+
+<!-- ลิงก์ไฟล์ JavaScript ข้างล่าง -->
+<script src="script.js"></script>
+
+</body>
+<nav style="text-align: center; margin-bottom: 30px;">
+  <a href="../HTML/student.html" class="nav-link" id="nav-student">🏠 Dashboard</a>
+  <a href="../HTML/activity.html" class="nav-link" id="nav-activity">➕ เพิ่มกิจกรรม</a>
+  <a href="../HTML/studentview.html" class="nav-link" id="nav-view">📥 รออนุมัติ</a> 
+  <a href="../HTML/index.html" class="nav-link" id="nav-index">🎯 แนะนำ</a>
+</nav>
+<script>
+  const current = window.location.pathname.split("/").pop();
+  if (current.includes("student.html")) {
+    document.getElementById("nav-student").classList.add("active");
+  } else if (current.includes("activity.html")) {
+    document.getElementById("nav-activity").classList.add("active");
+  } else if (current.includes("studentview.html")) {
+    document.getElementById("nav-view").classList.add("active");
+  } else if (current.includes("review.html")) {
+    document.getElementById("nav-review").classList.add("active");
+  } else if (current.includes("index.html")) {
+    document.getElementById("nav-index").classList.add("active");
+  }
+</script>
+
+</html>
