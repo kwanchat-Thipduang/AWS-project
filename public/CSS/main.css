@@ -1,4 +1,4 @@
- * {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -34,35 +34,36 @@
       background-color: white;
       padding: 2rem;
       border-radius: 20px;
-      width: 900px;
+      width: 800px;
+      height: 650px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     h2 {
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       color: #003366;
     }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+    .activity-item {
+      background-color: #e3b88d;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
     }
-    input, textarea, button {
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
+    .activity-item p {
+      margin: 0.2rem 0;
     }
-    button {
+    .button-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .button-container a {
       background-color: #003366;
       color: white;
-      border: none;
-      cursor: pointer;
+      padding: 0.75rem 2rem;
+      text-decoration: none;
+      border-radius: 8px;
     }
-    button:hover {
-      background-color: #002249;
-    }
-    
+
 .logo-img {
   max-height: 70px;
   width: auto;
@@ -96,9 +97,10 @@ nav .logo {
 }
 
 .scroll-box {
-  max-height: 250px;
+  max-height: 500px;
   overflow-y: auto;
   padding-right: 5px;
+  
 }
 .popup-overlay {
   display: none;
@@ -136,4 +138,13 @@ nav .logo {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.filter-container {
+  margin: 1rem 0;
+  display: flex;
+  gap: 2rem;
+}
+.filter-container label {
+  font-size: 0.95rem;
 }
