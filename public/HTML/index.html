@@ -1,108 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SkillSync - กิจกรรมที่แนะนำ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../CSS/index.css">
-  <link rel="stylesheet" href="../CSS/selection.css">
+  <title>SkillSync</title>
 </head>
 <body>
-
-<header>
-  <h1>SkillSync</h1>
-  <p>กิจกรรมที่แนะนำสำหรับการพัฒนาทักษะ</p>
-</header>
-
-<section>
-  <h2>🚀 กิจกรรมที่แนะนำ</h2>
-
-  <input type="text" id="searchInput" placeholder="ค้นหาทักษะ เช่น Public Speaking..." />
-
-  <div id="activityList">
-
-    <div class="recommendation">
-      <p><b>กิจกรรมแนะนำ:</b> Workshop การพูดในที่สาธารณะ</p>
-      <p><i>เพื่อเสริมทักษะ: Public Speaking</i></p>
+  <nav>
+    <div class="logo">SkillSync</div>
+    <div class="nav-links">
+      <a href="../HTML/index.html"class="active">แนะนำ</a>
+      <a href="../HTML/dashboard.html">Dashboard</a>
+      <a href="../HTML/add.html">เพิ่มกิจกรรม</a>
+      <a href="../HTML/approve.html">รออนุมัติ</a>
     </div>
-  
-    <div class="recommendation">
-      <p><b>กิจกรรมแนะนำ:</b> หลักสูตรการเขียนโปรแกรมขั้นสูง</p>
-      <p><i>เพื่อเสริมทักษะ: Advanced Programming</i></p>
+  </nav>
+  <main>
+    <div class="card">
+      <h2>กิจกรรมที่แนะนำ</h2>
+      <div class="recommend-item">
+        <p><strong>กิจกรรมที่แนะนำ:</strong> Workshop การพูดในที่สาธารณะ</p>
+        <p>เพื่อเสริมทักษะ: Public Speaking</p>
+      </div>
+      <div class="recommend-item">
+        <p><strong>กิจกรรมที่แนะนำ:</strong> หลักสูตรการเขียนโปรแกรมขั้นสูง</p>
+        <p>เพื่อเสริมทักษะ: Advanced Programming</p>
+      </div>
+      <div class="recommend-item">
+        <p><strong>กิจกรรมที่แนะนำ:</strong> สัมมนาทาวะผู้นำ 4.0</p>
+        <p>เพื่อเสริมทักษะ: Leadership</p>
+      </div>
+      <div class="recommend-item">
+        <p><strong>กิจกรรมที่แนะนำ:</strong> อบรมการทำงานเป็นทีม</p>
+        <p>เพื่อเสริมทักษะ: Teamwork</p>
+      </div>
+      <div class="button-container">
+        <a href="#">ไปยังหน้า Student Dashboard</a>
+      </div>
     </div>
-  
-    <div class="recommendation">
-      <p><b>กิจกรรมแนะนำ:</b> สัมมนาภาวะผู้นำ 4.0</p>
-      <p><i>เพื่อเสริมทักษะ: Leadership</i></p>
-    </div>
-  
-    <div class="recommendation">
-      <p><b>กิจกรรมแนะนำ:</b> อบรมการทำงานเป็นทีม</p>
-      <p><i>เพื่อเสริมทักษะ: Teamwork</i></p>
-    </div>
-  
-  </div>
-  
-
-  <div style="text-align: center; margin-top: 30px;">
-    <a href="student.html" class="btn">ไปยังหน้า Student Dashboard</a>
-  </div>
-</section>
-
-<script>
-  async function fetchActivities() {
-    const response = await fetch('activities.json');
-    const activities = await response.json();
-    displayActivities(activities);
-  }
-
-  function displayActivities(activities) {
-    const list = document.getElementById('activityList');
-    list.innerHTML = '';
-
-    activities.forEach(activity => {
-      const div = document.createElement('div');
-      div.className = 'recommendation';
-      div.innerHTML = `
-        <p><b>กิจกรรมแนะนำ:</b> ${activity.name}</p>
-        <p><i>เพื่อเสริมทักษะ: ${activity.skill}</i></p>
-      `;
-      list.appendChild(div);
-    });
-  }
-
-  document.getElementById('searchInput').addEventListener('input', async function() {
-    const query = this.value.toLowerCase();
-    const response = await fetch('activities.json');
-    const activities = await response.json();
-    
-    const filtered = activities.filter(a => a.skill.toLowerCase().includes(query));
-    displayActivities(filtered);
-  });
-
-  fetchActivities();
-</script>
-
+  </main>
 </body>
-<nav style="text-align: center; margin-bottom: 30px;">
-  <a href="../HTML/student.html" class="nav-link" id="nav-student">🏠 Dashboard</a>
-  <a href="../HTML/activity.html" class="nav-link" id="nav-activity">➕ เพิ่มกิจกรรม</a>
-  <a href="../HTML/studentview.html" class="nav-link" id="nav-view">📥 รออนุมัติ</a> 
-  <a href="../HTML/index.html" class="nav-link" id="nav-index">🎯 แนะนำ</a>
-</nav>
-<script>
-  const current = window.location.pathname.split("/").pop();
-  if (current.includes("student.html")) {
-    document.getElementById("nav-student").classList.add("active");
-  } else if (current.includes("activity.html")) {
-    document.getElementById("nav-activity").classList.add("active");
-  } else if (current.includes("studentview.html")) {
-    document.getElementById("nav-view").classList.add("active");
-  } else if (current.includes("review.html")) {
-    document.getElementById("nav-review").classList.add("active");
-  } else if (current.includes("index.html")) {
-    document.getElementById("nav-index").classList.add("active");
-  }
-</script>
-
 </html>

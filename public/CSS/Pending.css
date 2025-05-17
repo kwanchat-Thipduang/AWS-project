@@ -34,31 +34,31 @@
       background-color: white;
       padding: 2rem;
       border-radius: 20px;
-      width: 700px;
+      width: 900px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     h2 {
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       color: #003366;
     }
-    .recommend-item {
-      background-color: #e3b88d;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      border-radius: 10px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
     }
-    .recommend-item p {
-      margin: 0.2rem 0;
+    th, td {
+      padding: 12px;
+      text-align: left;
     }
-    .button-container {
-      text-align: center;
-      margin-top: 2rem;
-    }
-    .button-container a {
+    thead {
       background-color: #003366;
       color: white;
-      padding: 0.75rem 2rem;
-      text-decoration: none;
-      border-radius: 8px;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #f0f0f0;
+    }
+    .status {
+      color: orange;
+      font-weight: bold;
     }
