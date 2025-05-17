@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../CSS/dashboard.css" />
+  <link rel="stylesheet" href="../CSS/StudentForm.css" />
+  <title>เพิ่มกิจกรรม - SkillSync</title>
+</head>
+<body>
+  <!-- Navbar เดิมจาก dashboard -->
+  <nav>
+    <div class="logo">
+      <img src="../SkillSync.png" alt="logo" class="logo-img" />
+    </div>
+    <div class="nav-links">
+      <a href="../HTML/student.html">กิจกรรม</a>
+      <a href="../HTML/dashboard.html" class="active">Dashboard</a>
+      <a href="../HTML/Pending.html">รออนุมัติ</a>
+      <a href="#" onclick="openPopup(event)">
+        <img src="../user-icon.png" alt="user" class="user-icon" />
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main form section -->
+  <main>
+    <div class="form-container">
+      <h2>แบบฟอร์มกรอกข้อมูลกิจกรรม</h2>
+      <form action="#" method="post" enctype="multipart/form-data">
+        <input type="text" name="activity_name" placeholder="ชื่อกิจกรรม" required />
+        <input type="date" name="activity_date" placeholder="วันที่" required />
+        <input type="number" name="activity_hours" placeholder="จำนวนชั่วโมงที่ใช้" required />
+        <input type="text" name="activity_feedback" placeholder="ความคิดเห็นหรือสิ่งที่ได้เรียนรู้จากกิจกรรม" />
+        <label for="evidence">แนบหลักฐาน (เช่น ไฟล์รูป/ใบประกาศ)</label>
+        <input type="file" name="activity_file" placeholder="แนบหลักฐาน (เช่น ไฟล์รูป/ใบประกาศ)" />
+
+        <button type="submit">บันทึกกิจกรรม</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Popup user profile -->
+  <div class="popup-overlay" id="profilePopup">
+    <div class="popup-content">
+      <h3>ข้อมูลส่วนตัว</h3>
+      <p><strong>ชื่อ:</strong> สมชาย ตัวอย่าง</p>
+      <p><strong>คณะ:</strong> วิศวกรรมศาสตร์</p>
+      <p><strong>สาขา:</strong> วิศวกรรมคอมพิวเตอร์</p>
+      <p><strong>เบอร์ติดต่อ:</strong> 081-234-5678</p>
+      <p><strong>ชั่วโมงกิจกรรม:</strong> 45 ชั่วโมง</p>
+      <button onclick="closePopup()">ปิด</button>
+    </div>
+  </div>
+</body>
+</html>

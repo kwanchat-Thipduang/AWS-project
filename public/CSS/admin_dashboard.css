@@ -1,0 +1,157 @@
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+body {
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
+  background-color: #dce2e6;
+}
+
+    nav {
+      background-color: #0b1e43;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+    }
+    nav .nav-links a {
+      color: white;
+      margin-left: 2rem;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+    }
+    nav .nav-links a.active {
+      background-color: #4c628a;
+    }
+h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #003366;
+    }
+.logo-img {
+  max-height: 70px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 5px;
+}
+
+
+.user-icon {
+  height: 28px;
+  border-radius: 50%;
+}
+
+main {
+  padding: 40px 60px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.activity-box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #003366;
+  color: white;
+  padding: 12px;
+  font-weight: 600;
+}
+
+td {
+  padding: 10px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* ปุ่มอนุมัติและปฏิเสธในตาราง */
+.btn-approve,
+.btn-reject {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* ✅ สีเขียวของปุ่มอนุมัติ */
+.btn-approve {
+  color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-approve:hover {
+  background-color: #e6ffed;
+}
+
+/* ❌ สีแดงของปุ่มปฏิเสธ */
+.btn-reject {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-reject:hover {
+  background-color: #ffe6e6;
+}
+
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00000055;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 400px;
+}

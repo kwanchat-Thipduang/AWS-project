@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
+  background-color: #dce4ea;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+.form-container {
+  background-color: #ffffff;
+  padding: 48px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  height: 508px;
+  max-width: 650px;
+}
+form label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  margin-top: 4px;
+  opacity: 50%;
+  font-family: 'Kanit', sans-serif;
+}
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="number"],
+form input[type="file"] {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Kanit', sans-serif;
+}
+
+form input::placeholder {
+  color: #999;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+form input:focus {
+  outline: none;
+  border: 1px solid #0a2d66;
+}
+
+form button {
+  padding: 10px 16px;
+  background-color: #0a2d66;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Kanit', sans-serif;
+  cursor: pointer;
+  align-self: center;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+  width: fit-content;
+}
+
+form button:hover {
+  background-color: #083163;
+}
