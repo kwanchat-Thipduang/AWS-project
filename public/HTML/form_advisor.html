@@ -23,19 +23,65 @@
   <div class="container">
     <h2>ฟอร์มตรวจสอบกิจกรรม</h2>
     <form id="advisorForm">
-  <input type="text" placeholder="ชื่อนักศึกษา" id="studentName" required>
-  <input type="text" placeholder="ชื่อกิจกรรม" id="activityName" required>
-  <input type="text" placeholder="mm/dd/yy" id="activityDate" required>
-  <textarea rows="3" placeholder="ความคิดเห็นของนักศึกษา" required></textarea>
-  <textarea rows="3" placeholder="ความคิดเห็นของอาจารย์"></textarea>
+  <input type="text" id="studentName" readonly />
+  <input type="text" id="activityName" readonly />
+  <input type="text" id="activityDate" readonly />
+  <textarea id="advisorNote" placeholder="ความคิดเห็นของอาจารย์"></textarea>
 
   <div class="approval">
-    <label><input type="radio" name="status" value="approve"> <span class="green">อนุมัติ</span></label>
-    <label><input type="radio" name="status" value="reject"> <span class="red">ไม่อนุมัติ</span></label>
+    <label><input type="radio" name="status" value="Approved"> ✅ อนุมัติ</label>
+    <label><input type="radio" name="status" value="Rejected"> ❌ ไม่อนุมัติ</label>
   </div>
 
-  <button class="submit-btn" type="submit">ส่ง</button>
+  <button type="submit">ส่ง</button>
 </form>
   </div>
 </body>
 </html>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const activity = JSON.parse(localStorage.getItem("selectedActivity") || "{}");
+    if (activity) {
+      document.getElementById("studentName").value = activity.UserID || "-";
+      document.getElementById("activityName").value = activity.ActivityName || "-";
+      document.getElementById("activityDate").value = activity.Date || "-";
+    }
+
+    document.getElementById("advisorForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const status = document.querySelector("input[name='status']:checked")?.value;
+      if (!status) {
+        alert("กรุณาเลือกสถานะการอนุมัติ");
+        return;
+      }
+
+      const payload = {
+        ActivityID: activity.ActivityID,
+        Status: status,
+        ApprovedBy: "อาจารย์ตัวอย่าง", // หรือใช้ชื่อจาก session
+        Note: document.getElementById("advisorNote").value || ""
+      };
+
+      try {
+        const response = await fetch("https://hc4tw3wom27ltjls6ojjn5xgvq0flonj.lambda-url.us-east-1.on.aws/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        if (response.status === 200) {
+          alert("อัปเดตสถานะสำเร็จ");
+          localStorage.removeItem("selectedActivity");
+          window.location.href = "Pending_Advisor.html";
+        } else {
+          alert(result.message || "❌ ไม่สามารถอัปเดตได้");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("❌ เกิดข้อผิดพลาด");
+      }
+    });
+  });
+</script>

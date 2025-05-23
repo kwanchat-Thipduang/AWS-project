@@ -70,13 +70,14 @@
           alert("✅ Login สำเร็จ (Admin)");
           window.location.href = "/HTML/admin_dashboard.html";
         } else if (parsed.user) {
+          localStorage.setItem("userProfile", JSON.stringify(parsed.user));
           const userType = parsed.user.Type || type;
           if (userType === "Student") {
             alert("✅ Login สำเร็จ (Student)");
             window.location.href = "/HTML/student.html";
           } else if (userType === "Advisor") {
             alert("✅ Login สำเร็จ (Advisor)");
-            window.location.href = "/HTML/advisor.html";
+            window.location.href = "/HTML/Pending_Advisor.html";
           } else {
             alert("❌ ประเภทผู้ใช้ไม่ถูกต้อง");
           }

@@ -26,26 +26,11 @@
       <h2>กิจกรรม</h2>
       <input type="text" placeholder="ค้นหาเช่น Leadership, Advanced Programming" class="search-bar"/>
       <div class="filter-container">
-  <label><input type="checkbox" class="filter" value="Hard Skill"> Hard Skill</label>
-  <label><input type="checkbox" class="filter" value="Soft Skill"> Soft Skill</label>
-</div>
-      <div class="scroll-box">
-        <div class="activity-item">
-          <p><strong>กิจกรรมที่แนะนำ:</strong> Workshop การพูดในที่สาธารณะ</p>
-          <p>เพื่อเสริมทักษะ: Public Speaking</p>
-        </div>
-        <div class="activity-item">
-          <p><strong>กิจกรรมที่แนะนำ:</strong> หลักสูตรการเขียนโปรแกรมขั้นสูง</p>
-          <p>เพื่อเสริมทักษะ: Advanced Programming</p>
-        </div>
-        <div class="activity-item">
-          <p><strong>กิจกรรมที่แนะนำ:</strong> สัมมนาภาวะผู้นำ 4.0</p>
-          <p>เพื่อเสริมทักษะ: Leadership</p>
-        </div>
-        <div class="activity-item">
-          <p><strong>กิจกรรมที่แนะนำ:</strong> อบรมการทำงานเป็นทีม</p>
-          <p>เพื่อเสริมทักษะ: Teamwork</p>
-        </div>
+        <label><input type="checkbox" class="filter" value="Hard Skill"> Hard Skill</label>
+        <label><input type="checkbox" class="filter" value="Soft Skill"> Soft Skill</label>
+      </div>
+      <div class="scroll-box" id="activityList">
+        <p>⏳ กำลังโหลดกิจกรรม...</p>
       </div>
     </div>
   </main>
@@ -53,13 +38,55 @@
   <div class="popup-overlay" id="profilePopup">
     <div class="popup-content">
       <h3>ข้อมูลส่วนตัว</h3>
-      <p><strong>ชื่อ:</strong> สมชาย ตัวอย่าง</p>
-      <p><strong>คณะ:</strong> วิศวกรรมศาสตร์</p>
-      <p><strong>สาขา:</strong> วิศวกรรมคอมพิวเตอร์</p>
-      <p><strong>เบอร์ติดต่อ:</strong> 081-234-5678</p>
-      <p><strong>ชั่วโมงกิจกรรม:</strong> 45 ชั่วโมง</p>
+      <p><strong>ชื่อ:</strong> <span id="profileName"></span></p>
+      <p><strong>คณะ:</strong> <span id="profileFaculty"></span></p>
+      <p><strong>สาขา:</strong> <span id="profileBranch"></span></p>
+      <p><strong>เบอร์ติดต่อ:</strong> <span id="profilePhone"></span></p>
+      <p><strong>ชั่วโมงกิจกรรม:</strong> <span id="profileHours">0</span> ชั่วโมง</p>
       <button onclick="closePopup()">ปิด</button>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const container = document.getElementById("activityList");
+
+      try {
+        const response = await fetch("https://tlwdwkmuc2drupku4hm2zurb7q0ygbvu.lambda-url.us-east-1.on.aws/");
+        const parsed = await response.json();
+        const activities = parsed.data || [];
+
+        container.innerHTML = '';
+
+        if (activities.length === 0) {
+          container.innerHTML = '<p>ไม่พบกิจกรรม</p>';
+          return;
+        }
+
+        activities.forEach(activity => {
+          const div = document.createElement("div");
+          div.className = "activity-item";
+          div.innerHTML = `
+            <p><strong>ชื่อกิจกรรม:</strong> ${activity.ActivityName || '-'}</p>
+            <p><strong>คำอธิบาย:</strong> ${activity.Description || '-'}</p>
+            <p><strong>วันที่จัด:</strong> ${activity.Date || '-'}</p>
+            <p><strong>หน่วยงาน:</strong> ${activity.Department || '-'}</p>
+            <p><strong>Hard Skill:</strong> ${activity.Hardskill || '-'}</p>
+            <p><strong>Soft Skill:</strong> ${activity.Softskill || '-'}</p>
+            <p><strong>จำนวนชั่วโมง:</strong> ${activity.Hours || '-'} ชั่วโมง</p>
+          `;
+          div.onclick = () => {
+            localStorage.setItem("selectedActivity", JSON.stringify(activity));
+            window.location.href = "/HTML/Student_Form.html";
+          };
+          container.appendChild(div);
+        });
+
+      } catch (err) {
+        console.error("โหลดกิจกรรมล้มเหลว:", err);
+        container.innerHTML = `<p style="color: red;">❌ ไม่สามารถโหลดกิจกรรมจากเซิร์ฟเวอร์ได้</p>`;
+      }
+    });
+  </script>
 </body>
 </html>

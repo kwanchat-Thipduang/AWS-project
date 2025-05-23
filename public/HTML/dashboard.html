@@ -2,115 +2,37 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - SkillSync</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../CSS/dashboard.css" />
-  <script src="../Script/main.js" defer></script>
-  <title>SkillSync</title>
-<head>
-  <body>
+  <script src="../Script/dashboard.js" defer></script>
+</head>
+<body>
   <nav>
     <div class="logo"><img src="../SkillSync.png" alt="logo" class="logo-img" /></div>
     <div class="nav-links">
       <a href="../HTML/student.html">กิจกรรม</a>
-      <a href="../HTML/dashboard.html"class="active">Dashboard</a>
+      <a href="../HTML/dashboard.html" class="active">Dashboard</a>
       <a href="../HTML/Pending.html">รออนุมัติ</a>
-      <a href="#" onclick="openPopup(event)">
-      <img src="../user-icon.png" alt="user" class="user-icon" /></a>
     </div>
   </nav>
+
   <main>
-    <div class="card">
-      <h2>สรุปกิจกรรมที่เข้าร่วม</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ชื่อกิจกรรม</th>
-            <th>วันที่</th>
-            <th>หน่วยงานที่จัด</th>
-            <th>Hardskill</th>
-            <th>Softskill</th>
-            <th>ชั่วโมง</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>ค่ายอาสาพัฒนาโรงเรียน</td>
-            <td>2/10/2025</td>
-            <td>ชมรมอาสาพัฒนา</td>
-            <td>-</td>
-            <td>ความเป็นผู้นำ, การทำงานเป็นทีม</td>
-            <td>12</td>
-          </tr>
-          <tr>
-            <td>อบรม Python เบื้องต้น</td>
-            <td>3/15/2025</td>
-            <td>คณะวิทยาศาสตร์</td>
-            <td>การเขียนโปรแกรม, Logic</td>
-            <td>-</td>
-            <td>6</td>
-          </tr>
-          <tr>
-            <td>กิจกรรมอาสา ณ ชุมชน</td>
-            <td>1/20/2025</td>
-            <td>ค่ายพัฒนานักศึกษา</td>
-            <td>-</td>
-            <td>การสื่อสาร, ความรับผิดชอบ</td>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td>อบรม Excel ขั้นสูง</td>
-            <td>3/25/2025</td>
-            <td>สำนักงานเทคโนโลยีสารสนเทศ</td>
-            <td>การวิเคราะห์ข้อมูล, Excel Function</td>
-            <td>-</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>สัมมนา "สื่อสารอย่างมีพลัง"</td>
-            <td>2/1/2025</td>
-            <td>ศูนย์แนะแนว</td>
-            <td>-</td>
-            <td>การนำเสนอ, การฟังอย่างเข้าใจ</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>เวิร์กชอป Git & GitHub</td>
-            <td>4/5/2025</td>
-            <td>ชมรม Dev</td>
-            <td>Version Control(Git), การทำงานร่วมกันบนระบบ Git</td>
-            <td>-</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>สัมมนา Data Visualization</td>
-            <td>3/28/2025</td>
-            <td>คณะสถิติ</td>
-            <td>Tableau, การสื่อสารข้อมูลด้วยภาพ</td>
-            <td>การนำเสนอข้อมูล</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>ประชุมสโมสรนิสิต</td>
-            <td>2/8/2025</td>
-            <td>สโมสรนักศึกษา</td>
-            <td>-</td>
-            <td>การทำงานเป็นทีม, การบริหารเวลา</td>
-            <td>1</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="summary">เวลาที่ทำกิจกรรม <span>32</span></div>
-    </div>
+    <h2 style="text-align: center;">ประวัติกิจกรรมที่ได้รับการอนุมัติ</h2>
+    <div class="summary">รวมทั้งหมด: <span>0</span> ชั่วโมง</div>
+    <table>
+      <thead>
+        <tr>
+          <th>กิจกรรม</th>
+          <th>วันที่</th>
+          <th>หน่วยงาน</th>
+          <th>Hard Skill</th>
+          <th>Soft Skill</th>
+          <th>ชั่วโมง</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </main>
-   <div class="popup-overlay" id="profilePopup">
-  <div class="popup-content">
-    <h3>ข้อมูลส่วนตัว</h3>
-    <p><strong>ชื่อ:</strong> สมชาย ตัวอย่าง</p>
-    <p><strong>คณะ:</strong> วิศวกรรมศาสตร์</p>
-    <p><strong>สาขา:</strong> วิศวกรรมคอมพิวเตอร์</p>
-    <p><strong>เบอร์ติดต่อ:</strong> 081-234-5678</p>
-    <p><strong>ชั่วโมงกิจกรรม:</strong> 45 ชั่วโมง</p>
-    <button onclick="closePopup()">ปิด</button>
-  </div>
 </body>
 </html>

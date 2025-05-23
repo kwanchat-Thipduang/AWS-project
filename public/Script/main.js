@@ -8,6 +8,16 @@ function closePopup() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // ✅ โหลดข้อมูล userProfile จาก localStorage
+  const user = JSON.parse(localStorage.getItem("userProfile") || "{}");
+  if (user && user.UserName && document.getElementById("profileName")) {
+    document.getElementById("profileName").textContent = user.UserName || "-";
+    document.getElementById("profileFaculty").textContent = user.Faculty || "-";
+    document.getElementById("profileBranch").textContent = user.Branch || "-";
+    document.getElementById("profilePhone").textContent = user.PhoneNum || "-";
+    document.getElementById("profileHours").textContent = user.Activity?.length || 0;
+  }
+
   // ✅ form บันทึกกิจกรรม
   const form = document.getElementById('activityForm');
   if (form) {
@@ -95,7 +105,7 @@ async function updateStatus(activityId, status) {
       })
     });
 
-    const text = await response.text(); // 
+    const text = await response.text();
     let result;
     try {
       result = JSON.parse(text);
@@ -114,4 +124,65 @@ async function updateStatus(activityId, status) {
     console.error("อัปเดตสถานะล้มเหลว:", err);
     alert("ไม่สามารถอัปเดตสถานะได้: " + err.message);
   }
+}
+
+const container = document.getElementById("activityList");
+const filterCheckboxes = document.querySelectorAll(".filter");
+let allActivities = [];
+
+if (container) {
+  async function loadActivities() {
+    try {
+      const response = await fetch("https://tlwdwkmuc2drupku4hm2zurb7q0ygbvu.lambda-url.us-east-1.on.aws/");
+      const parsed = await response.json();
+      allActivities = parsed.data || [];
+      renderFilteredActivities();
+    } catch (err) {
+      container.innerHTML = `<p style="color:red;">❌ โหลดกิจกรรมไม่สำเร็จ</p>`;
+    }
+  }
+
+  function renderFilteredActivities() {
+    const hard = document.querySelector("input[value='Hard Skill']").checked;
+    const soft = document.querySelector("input[value='Soft Skill']").checked;
+
+    const filtered = allActivities.filter(activity => {
+      const hasHard = activity.Hardskill && activity.Hardskill !== "-";
+      const hasSoft = activity.Softskill && activity.Softskill !== "-";
+
+      if (hard && soft) return hasHard && hasSoft;
+      if (hard) return hasHard;
+      if (soft) return hasSoft;
+      return true;
+    });
+
+    container.innerHTML = '';
+    if (filtered.length === 0) {
+      container.innerHTML = '<p>ไม่พบกิจกรรมตามตัวกรอง</p>';
+      return;
+    }
+
+    filtered.forEach(activity => {
+      const div = document.createElement("div");
+      div.className = "activity-item";
+      div.innerHTML = `
+        <p><strong>ชื่อกิจกรรม:</strong> ${activity.ActivityName || '-'}</p>
+        <p><strong>คำอธิบาย:</strong> ${activity.Description || '-'}</p>
+        <p><strong>วันที่จัด:</strong> ${activity.Date || '-'}</p>
+        <p><strong>หน่วยงาน:</strong> ${activity.Department || '-'}</p>
+        <p><strong>Hard Skill:</strong> ${activity.Hardskill || '-'}</p>
+        <p><strong>Soft Skill:</strong> ${activity.Softskill || '-'}</p>
+        <p><strong>จำนวนชั่วโมง:</strong> ${activity.Hours || '-'} ชั่วโมง</p>
+      `;
+      div.onclick = () => {
+        localStorage.setItem("selectedActivity", JSON.stringify(activity));
+        window.location.href = "/HTML/Student_Form.html";
+      };
+      container.appendChild(div);
+    });
+  }
+
+  filterCheckboxes.forEach(cb => cb.addEventListener("change", renderFilteredActivities));
+
+  loadActivities();
 }
