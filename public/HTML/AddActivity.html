@@ -20,15 +20,15 @@
   <main>
     <div class="card">
       <h2>เพิ่มข้อมูลกิจกรรม</h2>
-      <form>
-        <input type="text" placeholder="ชื่อกิจกรรม" required />
-        <input type="text" placeholder="mm/dd/yy" required />
-        <input type="text" placeholder="หน่วยงานที่จัด" required />
-        <input type="text" placeholder="Hardskill ที่ได้ (ถ้าไม่มีใส่ -)" />
-        <input type="text" placeholder="Softskill ที่ได้ (ถ้าไม่มีใส่ -)" />
-        <input type="number" placeholder="จำนวนชั่วโมงกิจกรรม" required />
-        <button type="submit">บันทึกกิจกรรม</button>
-      </form>
+      <form id="activityForm">
+  <input type="text" id="ActivityName" placeholder="ชื่อกิจกรรม" required />
+  <input type="text" id="Date" placeholder="mm/dd/yy" required />
+  <input type="text" id="Department" placeholder="หน่วยงานที่จัด" required />
+  <input type="text" id="Hardskill" placeholder="Hardskill ที่ได้ (ถ้าไม่มีใส่ -)" />
+  <input type="text" id="Softskill" placeholder="Softskill ที่ได้ (ถ้าไม่มีใส่ -)" />
+  <input type="number" id="Hours" placeholder="จำนวนชั่วโมงกิจกรรม" required />
+  <button type="submit">บันทึกกิจกรรม</button>
+</form>
     </div>
   </main>
    <div class="popup-overlay" id="profilePopup">
