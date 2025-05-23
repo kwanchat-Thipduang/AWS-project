@@ -7,13 +7,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/form_advisor.css">
   <link rel="stylesheet" href="../CSS/main.css">
+  <script src="../Script/main.js" defer></script>
 </head>
 <body>
   <nav>
     <div class="logo"><img src="../SkillSync.png" alt="logo" class="logo-img" /></div>
     <div class="nav-links">
-      <a href="../HTML/student.html">เพิ่มกิจกรรม</a>
-      <a href="../HTML/Pending.html"class="active">รออนุมัติ</a>
+      <a href="../HTML/Pending_Advisor.html">หน้าหลัก</a>
+      <a href="../HTML/form_advisor.html"class="active">รออนุมัติ</a>
       <a href="#" onclick="openPopup(event)">
       <img src="../user-icon.png" alt="user" class="user-icon" /></a>
     </div>
@@ -21,20 +22,20 @@
 
   <div class="container">
     <h2>ฟอร์มตรวจสอบกิจกรรม</h2>
-    <form>
-      <input type="text" placeholder="ชื่อนักศึกษา" required>
-      <input type="text" placeholder="ชื่อกิจกรรม" required>
-      <input type="text" placeholder="mm/dd/yy" required>
-      <textarea rows="3" placeholder="ความคิดเห็นของนักศึกษา" required></textarea>
-      <textarea rows="3" placeholder="ความคิดเห็นของอาจารย์"></textarea>
+    <form id="advisorForm">
+  <input type="text" placeholder="ชื่อนักศึกษา" id="studentName" required>
+  <input type="text" placeholder="ชื่อกิจกรรม" id="activityName" required>
+  <input type="text" placeholder="mm/dd/yy" id="activityDate" required>
+  <textarea rows="3" placeholder="ความคิดเห็นของนักศึกษา" required></textarea>
+  <textarea rows="3" placeholder="ความคิดเห็นของอาจารย์"></textarea>
 
-      <div class="approval">
-        <label><input type="radio" name="status" value="approve"> <span class="green">อนุมัติ</span></label>
-        <label><input type="radio" name="status" value="reject"> <span class="red">ไม่อนุมัติ</span></label>
-      </div>
+  <div class="approval">
+    <label><input type="radio" name="status" value="approve"> <span class="green">อนุมัติ</span></label>
+    <label><input type="radio" name="status" value="reject"> <span class="red">ไม่อนุมัติ</span></label>
+  </div>
 
-      <button class="submit-btn" type="submit">ส่ง</button>
-    </form>
+  <button class="submit-btn" type="submit">ส่ง</button>
+</form>
   </div>
 </body>
 </html>

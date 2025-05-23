@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pending (Advisor)</title>
+  <link rel="stylesheet" href="../CSS/dashboard.css" />
+  <script src="../Script/Pending_Advisor.js" defer></script>
+</head>
+<body>
+  <nav>
+    <div class="logo"><img src="../SkillSync.png" alt="logo" class="logo-img" /></div>
+    <div class="nav-links">
+      <a href="../HTML/advisor.html"class="active">หน้าหลัก</a>
+      <a href="../HTML/Pending_Advisor.html">รออนุมัติ</a>
+      <a href="#" onclick="openPopup(event)">
+        <img src="../user-icon.png" alt="user" class="user-icon" />
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <h2 style="text-align: center;">กิจกรรมที่รออนุมัติ (อาจารย์)</h2>
+    <div class="card-container" id="cardContainer"></div>
+  </main>
+
+  <div class="popup-overlay" id="profilePopup" style="display: none;">
+    <div class="popup-content">
+      <h3>ข้อมูลส่วนตัว</h3>
+      <p><strong>ชื่อ:</strong> อ. สมหมาย ตัวอย่าง</p>
+      <p><strong>ภาควิชา:</strong> วิศวกรรมคอมพิวเตอร์</p>
+      <button onclick="closePopup()">ปิด</button>
+    </div>
+  </div>
+</body>
+</html>
+

@@ -32,7 +32,7 @@ let pendingActivities = [
 ];
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'HTML', 'student.html'));
+    res.sendFile(path.join(__dirname, 'public', 'HTML', 'login.html'));
   });
   
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>สมัครสมาชิก - SkillSync</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../CSS/signup.css" />
+</head>
+<body>
+  <div class="login-page">
+    <div class="logo">
+      <img src="../SkillSync_B.png" alt="Logo" width="200">
+    </div>
+    <div class="login-box">
+      <h2>สมัครสมาชิก</h2>
+      <form onsubmit="event.preventDefault(); signup();">
+        <input type="text" id="username" placeholder="ชื่อผู้ใช้" required />
+        <input type="password" id="password" placeholder="รหัสผ่าน" required />
+        <input type="email" id="email" placeholder="อีเมล" required />
+        <input type="text" id="studentId" placeholder="รหัสนักศึกษา" required />
+        <input type="text" id="faculty" placeholder="คณะ" required />
+        <input type="text" id="branch" placeholder="สาขา" required />
+        <input type="text" id="phone" placeholder="เบอร์โทรศัพท์" required />
+        <select id="type" required>
+          <option value="">เลือกประเภทผู้ใช้</option>
+          <option value="Student">Student</option>
+          <option value="Advisor">Advisor</option>
+        </select>
+        <button type="submit">สมัครสมาชิก</button>
+        <p><a href="login.html">กลับไปหน้าเข้าสู่ระบบ</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+  async function signup() {
+    const payload = {
+      action: "signup",
+      UserName: document.getElementById("username").value,
+      UserPassword: document.getElementById("password").value,
+      UserEmail: document.getElementById("email").value,
+      StudentID: document.getElementById("studentId").value,
+      Faculty: document.getElementById("faculty").value,
+      Branch: document.getElementById("branch").value,
+      PhoneNum: document.getElementById("phone").value,
+      Type: document.getElementById("type").value
+    };
+
+    try {
+      const response = await fetch("https://cdor4ld2n4mfkmdtxpdgpb3nfi0dyrjs.lambda-url.us-east-1.on.aws/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const parsed = await response.json();
+
+      console.log("Lambda response:", parsed);
+
+      if (parsed.message === "User Created") {
+        alert("✅ สมัครสมาชิกสำเร็จ กรุณาเข้าสู่ระบบ");
+        window.location.href = "login.html";
+      } else if (parsed.error?.includes("used")) {
+        alert("❌ Username นี้ถูกใช้แล้ว กรุณาใช้ชื่ออื่น");
+      } else {
+        alert(parsed.message || parsed.error || "❌ สมัครไม่สำเร็จ");
+      }
+
+    } catch (err) {
+      console.error(err);
+      alert("❌ เกิดข้อผิดพลาดขณะสมัคร");
+    }
+  }
+</script>
+</body>
+</html>
