@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../CSS/admin_dashboard.css" />
-  <script src="../Script/main.js" defer></script>
+  <script src="../Script/main.js" defer></script> <!-- ✅ เปลี่ยนตรงนี้ -->
   <title>SkillSync – Admin</title>
 </head>
 <body>
@@ -36,38 +36,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>กิจกรรมอบรมพัฒนาบุคลากร</td>
-            <td>20/03/2025</td>
-            <td>คณะสังคมศาสตร์</td>
-            <td>-</td>
-            <td>การทำงานร่วมกันเป็นทีม</td>
-            <td>4</td>
-            <td>
-            <button onclick="approve(this)" class="btn-approve">✅ อนุมัติ</button>
-            <button onclick="reject(this)" class="btn-reject">❌ ปฏิเสธ</button>
-            </td>
-          </tr>
-          <tr>
-            <td>Workshop AI</td>
-            <td>04/10/2025</td>
-            <td>ศูนย์เทคโนโลยี</td>
-            <td>การใช้ AI</td>
-            <td>Critical Thinking</td>
-            <td>3</td>
-                <td>
-            <button onclick="approve(this)" class="btn-approve">✅ อนุมัติ</button>
-            <button onclick="reject(this)" class="btn-reject">❌ ปฏิเสธ</button>
-                </td>
-          </tr>
-          <!-- Add more rows as needed -->
+          <!-- ✅ ไม่ต้องเขียนแถวไว้ล่วงหน้า -->
         </tbody>
       </table>
     </div>
   </main>
 
-
-  <!-- เดี๋ยวเอาข้อมูล database มาแสดง -->
   <div class="popup-overlay" id="profilePopup">
     <div class="popup-content">
       <h3>ข้อมูลส่วนตัว</h3>
