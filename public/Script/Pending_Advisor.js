@@ -17,19 +17,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     waitingList.forEach(activity => {
-      const card = document.createElement("div");
-      card.className = "activity-card";
-      card.innerHTML = `
-        <h3>${activity.ActivityName}</h3>
-        <p><strong>วันที่:</strong> ${activity.Date}</p>
-        <p><strong>ชั่วโมง:</strong> ${activity.Hours}</p>
-        <p><strong>นักศึกษา:</strong> ${activity.Username}</p>
-        <p><strong>Hard Skill:</strong> ${activity.Hardskill}</p>
-        <p><strong>Soft Skill:</strong> ${activity.Softskill}</p>
-        <button onclick='viewActivity(${JSON.stringify(activity)})'>📄 ตรวจสอบ</button>
-      `;
-      container.appendChild(card);
-    });
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td>${activity.Username}</td>
+    <td>${activity.ActivityName}</td>
+    <td>${activity.Date}</td>
+    <td>${activity.Hours}</td>
+    <td>${activity.Hardskill || '-'}</td>
+    <td>${activity.Softskill || '-'}</td>
+    
+    <td>
+      <button onclick='viewActivity(${JSON.stringify(activity)})'>📄 ตรวจสอบ</button>
+    </td>
+  `;
+  container.appendChild(row);
+});
   } catch (err) {
     console.error("โหลดกิจกรรมล้มเหลว:", err);
     container.innerHTML = "<p style='color:red'>❌ โหลดข้อมูลไม่สำเร็จ</p>";

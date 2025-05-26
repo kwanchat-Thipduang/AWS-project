@@ -1,75 +1,122 @@
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-    body {
-      background-color: #dce2e6;
-    }
-    nav {
-      background-color: #0b1e43;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: white;
-    }
-    nav .nav-links a {
-      color: white;
-      margin-left: 2rem;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-    }
-    nav .nav-links a.active {
-      background-color: #4c628a;
-    }
-    main {
-      display: flex;
-      justify-content: center;
-      padding: 2rem;
-    }
-    .card {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 20px;
-      width: 900px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #003366;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-    th, td {
-      padding: 12px;
-      text-align: left;
-    }
-    thead {
-      background-color: #a47544;
-      color: white;
-    }
-    tbody tr:nth-child(even) {
-      background-color: #f5e4cf;
-    }
-    tbody tr:nth-child(odd) {
-      background-color: #f0d2a8;
-    }
-    .summary {
-      margin-top: 1.5rem;
-      text-align: right;
-      font-weight: bold;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Kanit', sans-serif;
+}
+
+body {
+  background-color: #dce2e6;
+}
+
+nav {
+  background-color: #0b1e43;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+nav .nav-links a {
+  color: white;
+  margin-left: 2rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+nav .nav-links a.active {
+  background-color: #4c628a;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #003366;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 1000px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+/* ====== ตาราง ====== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 0.95rem;
+  vertical-align: top;
+  word-wrap: break-word;
+}
+
+thead {
+  background-color: #003366;
+  color: white;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* กำหนดความกว้างแต่ละคอลัมน์ */
+th:nth-child(1), td:nth-child(1) { min-width: 120px; }  /* ชื่อนักศึกษา */
+th:nth-child(2), td:nth-child(2) { min-width: 160px; }  /* ชื่อกิจกรรม */
+th:nth-child(3), td:nth-child(3) { min-width: 100px; }  /* วันที่ */
+th:nth-child(4), td:nth-child(4) { min-width: 60px; }   /* ชั่วโมง */
+th:nth-child(5), td:nth-child(5) { min-width: 160px; }  /* Soft Skill */
+th:nth-child(6), td:nth-child(6) { min-width: 100px; }  /* Hard Skill */
+th:nth-child(7), td:nth-child(7) { min-width: 120px; text-align: center; }  /* ปุ่ม */
+
+/* ปุ่มตรวจสอบ */
+table button {
+  padding: 6px 14px;
+  background-color: #005399;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+table button:hover {
+  background-color: #003f87;
+}
+
+/* logo / ไอคอน */
 .logo-img {
   max-height: 70px;
   width: auto;
 }
+
 nav .logo {
   display: flex;
   align-items: center;
@@ -83,26 +130,7 @@ nav .logo {
   vertical-align: middle;
 }
 
-.subtitle {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #444;
-  margin-bottom: 0.5rem;
-}
-
-.search-bar {
-  width: 100%;
-  padding: 0.5rem 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.scroll-box {
-  max-height: 250px;
-  overflow-y: auto;
-  padding-right: 5px;
-}
+/* popup profile */
 .popup-overlay {
   display: none;
   position: fixed;
@@ -139,30 +167,4 @@ nav .logo {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-.activity-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.activity-card:hover {
-  transform: scale(1.01);
-  background-color: #f9f9f9;
-}
-
-.activity-card p {
-  margin: 0.2rem 0;
 }

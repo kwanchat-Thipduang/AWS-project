@@ -1,93 +1,97 @@
-
+/* ส่วนฟอร์มทั่วไปคงเดิม */
 body {
   margin: 0;
   font-family: 'Kanit', sans-serif;
-  background-color: #CDD5DB;
+  background-color: #f0f4f8;
 }
-.navbar {
-  background-color: #071739;
-  height: 80px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
-}
-.navbar .left {
-  font-size: 35px;
-  font-weight: 700;
-}
-.navbar .right {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-}
-.navbar .right div {
-  font-size: 25px;
-  font-weight: 400;
-  background-color: #4B6382;
-  padding: 10px 20px;
-  border-radius: 10px;
-}
+
 .container {
-  max-width: 800px;
-  margin: 50px auto;
+  max-width: 600px;
+  margin: 60px auto;
   background-color: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  padding: 50px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
+
 h2 {
   text-align: center;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
-  margin-bottom: 40px;
+  color: #003366;
+  margin-bottom: 30px;
 }
+
 input, textarea {
   width: 100%;
-  padding: 15px;
-  margin-bottom: 25px;
-  border: 1px solid #D7D7D7;
-  border-radius: 10px;
-  font-size: 20px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 12px;
+  font-size: 18px;
   color: #333;
+  transition: border-color 0.2s;
 }
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #0056b3;
+}
+
 input::placeholder, textarea::placeholder {
-  color: #ACACAC;
+  color: #90a4ae;
 }
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ✅ ปรับตรงนี้ให้เหมือนในภาพ */
 .approval {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-top: -10px;
+  justify-content: center;
+  gap: 30px;
   margin-bottom: 30px;
-  font-size: 25px;
+  font-size: 18px;
 }
+
 .approval label {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  font-weight: bold;
+  white-space: nowrap;
 }
-.approval .green {
-  font-size: 18px;
-  color: #4DCF33;
-  font-weight: 700;
+
+.approval input[type="radio"] {
+  accent-color: currentColor;
 }
-.approval .red {
-  font-size: 18px;
-  color: #CC2323;
-  font-weight: 700;
+
+.approval label:first-child {
+  color: #27ae60; /* เขียว */
 }
+
+.approval label:last-child {
+  color: #e53935; /* แดง */
+}
+
+/* ✅ ปุ่มส่ง: ย่อความกว้าง */
 .submit-btn {
-  background-color: #005399;
+  background-color: #0056b3;
   color: white;
-  font-weight: 700;
-  font-size: 25px;
-  padding: 10px 40px;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 30px;
   border: none;
-  border-radius: 10px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   display: block;
   margin: 0 auto;
+  width: fit-content;
+}
+
+.submit-btn:hover {
+  background-color: #003f87;
 }
