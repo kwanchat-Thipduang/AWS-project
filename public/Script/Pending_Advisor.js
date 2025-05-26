@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <h3>${activity.ActivityName}</h3>
         <p><strong>วันที่:</strong> ${activity.Date}</p>
         <p><strong>ชั่วโมง:</strong> ${activity.Hours}</p>
-        <p><strong>นักศึกษา:</strong> ${activity.UserID}</p>
+        <p><strong>นักศึกษา:</strong> ${activity.Username}</p>
         <p><strong>Hard Skill:</strong> ${activity.Hardskill}</p>
         <p><strong>Soft Skill:</strong> ${activity.Softskill}</p>
         <button onclick='viewActivity(${JSON.stringify(activity)})'>📄 ตรวจสอบ</button>
