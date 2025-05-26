@@ -34,11 +34,11 @@
       <textarea id="advisorNote" placeholder="ความคิดเห็นของอาจารย์"></textarea>
 
       <div class="approval">
-        <label><input type="radio" name="status" value="Approved"> ✅ อนุมัติ</label>
-        <label><input type="radio" name="status" value="Rejected"> ❌ ไม่อนุมัติ</label>
+        <label><input type="radio" name="status" value="Approved">อนุมัติ</label>
+        <label><input type="radio" name="status" value="Rejected">ไม่อนุมัติ</label>
       </div>
 
-      <button type="submit">ส่ง</button>
+      <button type="submit" class="submit-btn">ส่ง</button>
     </form>
   </div>
 
@@ -67,7 +67,7 @@
         }
 
         const payload = {
-          ActivityID: document.getElementById("ActivityID").value,
+          ActivityID: activity.ActivityID,
           Status: status,
           ApprovedBy: "อาจารย์ตัวอย่าง",
           Note: document.getElementById("advisorNote").value || ""

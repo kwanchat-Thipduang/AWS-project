@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <td>${a.Hardskill}</td>
         <td>${a.Softskill}</td>
         <td>${a.Hours}</td>
+        <td>${a.Note}</td>
       `;
       tbody.appendChild(row);
     });

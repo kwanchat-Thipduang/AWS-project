@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="../CSS/dashboard.css" />
   <title>กิจกรรมที่ส่งแล้ว - SkillSync</title>
   <script src="../Script/Pending.js" defer></script>
+    <script src="../Script/main.js" defer></script>
 </head>
 <body>
   <nav>
@@ -14,25 +15,40 @@
       <a href="../HTML/student.html">กิจกรรม</a>
       <a href="../HTML/dashboard.html">Dashboard</a>
       <a href="../HTML/Pending.html" class="active">รออนุมัติ</a>
+            <a href="#" onclick="openPopup(event)">
+        <img src="../user-icon.png" alt="user" class="user-icon" />
+      </a>
     </div>
   </nav>
 
   <main>
-    <h2 style="text-align: center;">สถานะกิจกรรมที่ส่ง</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>กิจกรรม</th>
-          <th>วันที่</th>
-          <th>หน่วยงาน</th>
-          <th>Hard Skill</th>
-          <th>Soft Skill</th>
-          <th>ชั่วโมง</th>
-          <th>สถานะ</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+    <div class="card">
+      <h2 style="text-align: center;">สถานะกิจกรรมที่ส่ง</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>กิจกรรม</th>
+            <th>วันที่</th>
+            <th>หน่วยงาน</th>
+            <th>Hard Skill</th>
+            <th>Soft Skill</th>
+            <th>ชั่วโมง</th>
+            <th>สถานะ</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </main>
+      <div class="popup-overlay" id="profilePopup">
+    <div class="popup-content">
+      <h3>ข้อมูลส่วนตัว</h3>
+      <p><strong>ชื่อ:</strong> <span id="profileName"></span></p>
+      <p><strong>คณะ:</strong> <span id="profileFaculty"></span></p>
+      <p><strong>สาขา:</strong> <span id="profileBranch"></span></p>
+      <p><strong>เบอร์ติดต่อ:</strong> <span id="profilePhone"></span></p>
+      <button onclick="closePopup()">ปิด</button>
+    </div>
+  </div>
 </body>
 </html>

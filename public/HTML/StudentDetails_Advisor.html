@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pending (Advisor)</title>
+  <link rel="stylesheet" href="../CSS/dashboard.css" />
+  <script src="../Script/Student_Details_Advisor.js" defer></script>
+  <script src="../Script/main.js" defer></script>
+</head>
+<body>
+  <nav>
+    <div class="logo"><img src="../SkillSync.png" alt="logo" class="logo-img" /></div>
+    <div class="nav-links">
+            <a href="../HTML/Pending_Advisor.html">หน้าหลัก</a>
+      <a href="../HTML/StudentDetails_Advisor.html"class="active">ข้อมูลของนักศึกษา</a>
+      <a href="#" onclick="openPopup(event)">
+        <img src="../user-icon.png" alt="user" class="user-icon" />
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <h2 style="text-align: center;"></h2>
+<div class="carddb">
+  <h2 class="title">ข้อมูลของนักศึกษา</h2>
+<table class="tabledb">
+  <thead class="theaddb">
+    <tr>
+      <th>ชื่อนักศึกษา</th>
+      <th>ชั่วโมงรวม</th>
+      <th>Hard Skill</th>
+      <th>Soft Skill</th>
+    </tr>
+  </thead>
+  <tbody id="summaryTableBody"></tbody>
+</table>
+</div>
+  </main>
+
+  <div class="popup-overlay" id="profilePopup">
+    <div class="popup-content">
+      <h3>ข้อมูลส่วนตัว</h3>
+      <p><strong>ชื่อ:</strong> <span id="profileName"></span></p>
+      <p><strong>คณะ:</strong> <span id="profileFaculty"></span></p>
+      <p><strong>สาขา:</strong> <span id="profileBranch"></span></p>
+      <p><strong>เบอร์ติดต่อ:</strong> <span id="profilePhone"></span></p>
+      <button onclick="closePopup()">ปิด</button>
+    </div>
+  </div>
+</body>
+</html>

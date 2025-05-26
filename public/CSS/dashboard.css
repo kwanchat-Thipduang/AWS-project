@@ -67,7 +67,7 @@ table {
 
 th, td {
   padding: 12px 16px;
-  text-align: left;
+  text-align: center;
   font-size: 0.95rem;
   vertical-align: top;
   word-wrap: break-word;
@@ -167,4 +167,25 @@ nav .logo {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.carddb{
+  background-color: white;
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 1000px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2.title {
+  text-align: center;
+  color: #003366;
+  margin-bottom: 1rem;
+}
+
+.summary {
+  margin-top: 1.5rem;
+  text-align: right;
+  font-weight: bold;
 }

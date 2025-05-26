@@ -55,17 +55,21 @@ textarea {
   margin-bottom: 30px;
   font-size: 18px;
 }
+/* ปรับ .approval input[type="radio"] ให้จัดวางแนวตั้งตรงกลาง */
+.approval input[type="radio"] {
+  accent-color: currentColor;
+  vertical-align: middle; /* ช่วยให้วงกลมอยู่กึ่งกลางแนวตั้ง */
+  margin-top: 0;          /* ลบ margin บนที่อาจทำให้ลอย */
+}
 
+/* ถ้าต้องการให้ label ตัวหนังสือจัดกลางแนวตั้งกับวงกลม */
 .approval label {
-  display: flex;
-  align-items: center;
+  display: inline-flex;       /* เปลี่ยนเป็น inline-flex */
+  align-items: center;        /* จัดกึ่งกลางแนวตั้ง */
   gap: 8px;
   font-weight: bold;
   white-space: nowrap;
-}
-
-.approval input[type="radio"] {
-  accent-color: currentColor;
+  cursor: pointer;            /* เปลี่ยน cursor เมื่อชี้ */
 }
 
 .approval label:first-child {
@@ -80,18 +84,20 @@ textarea {
 .submit-btn {
   background-color: #0056b3;
   color: white;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 10px 30px;
+  font-weight: 700;
+  font-size: 22px;
+  padding: 16px 60px;
   border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   display: block;
   margin: 0 auto;
   width: fit-content;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .submit-btn:hover {
   background-color: #003f87;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
