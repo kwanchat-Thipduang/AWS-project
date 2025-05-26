@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -7,81 +6,92 @@
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../CSS/form_advisor.css">
   <link rel="stylesheet" href="../CSS/main.css">
-  <script src="../Script/main.js" defer></script>
 </head>
 <body>
   <nav>
     <div class="logo"><img src="../SkillSync.png" alt="logo" class="logo-img" /></div>
     <div class="nav-links">
       <a href="../HTML/Pending_Advisor.html">หน้าหลัก</a>
-      <a href="../HTML/form_advisor.html"class="active">รออนุมัติ</a>
-      <a href="#" onclick="openPopup(event)">
-      <img src="../user-icon.png" alt="user" class="user-icon" /></a>
+      <a href="../HTML/form_advisor.html" class="active">รออนุมัติ</a>
     </div>
   </nav>
 
   <div class="container">
     <h2>ฟอร์มตรวจสอบกิจกรรม</h2>
     <form id="advisorForm">
-  <input type="text" id="studentName" readonly />
-  <input type="text" id="activityName" readonly />
-  <input type="text" id="activityDate" readonly />
-  <textarea id="advisorNote" placeholder="ความคิดเห็นของอาจารย์"></textarea>
+      <input type="text" id="Username" readonly placeholder="Username" />
+      <input type="text" id="ActivityName" readonly placeholder="ชื่อกิจกรรม" />
+      <input type="text" id="Date" readonly placeholder="วันที่จัดกิจกรรม" />
+      <input type="number" id="Hours" readonly placeholder="จำนวนชั่วโมง" />
+      <input type="text" id="Department" readonly placeholder="หน่วยงานที่จัดกิจกรรม" />
+      <input type="text" id="Hardskill" readonly placeholder="Hard Skill ที่ได้" />
+      <input type="text" id="Softskill" readonly placeholder="Soft Skill ที่ได้" />
+      <input type="text" id="Description" readonly placeholder="รายละเอียดกิจกรรม" />
+      <input type="text" id="activity_feedback" readonly placeholder="สิ่งที่ได้เรียนรู้" />
 
-  <div class="approval">
-    <label><input type="radio" name="status" value="Approved"> ✅ อนุมัติ</label>
-    <label><input type="radio" name="status" value="Rejected"> ❌ ไม่อนุมัติ</label>
+      <textarea id="advisorNote" placeholder="ความคิดเห็นของอาจารย์"></textarea>
+
+      <div class="approval">
+        <label><input type="radio" name="status" value="Approved"> ✅ อนุมัติ</label>
+        <label><input type="radio" name="status" value="Rejected"> ❌ ไม่อนุมัติ</label>
+      </div>
+
+      <button type="submit">ส่ง</button>
+    </form>
   </div>
 
-  <button type="submit">ส่ง</button>
-</form>
-  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const activity = JSON.parse(localStorage.getItem("selectedActivity") || "{}");
+      if (activity) {
+        document.getElementById("Username").value = activity.Username || "-";
+        document.getElementById("ActivityName").value = activity.ActivityName || "-";
+        document.getElementById("Date").value = activity.Date || "-";
+        document.getElementById("Hours").value = activity.Hours || "0";
+        document.getElementById("Department").value = activity.Department || "-";
+        document.getElementById("Hardskill").value = activity.Hardskill || "-";
+        document.getElementById("Softskill").value = activity.Softskill || "-";
+        document.getElementById("Description").value = activity.Description || "-";
+        document.getElementById("activity_feedback").value = activity.activity_feedback || "-";
+      }
+
+      document.getElementById("advisorForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const status = document.querySelector("input[name='status']:checked")?.value;
+        if (!status) {
+          alert("กรุณาเลือกสถานะการอนุมัติ");
+          return;
+        }
+
+        const payload = {
+          ActivityID: document.getElementById("ActivityID").value,
+          Status: status,
+          ApprovedBy: "อาจารย์ตัวอย่าง",
+          Note: document.getElementById("advisorNote").value || ""
+        };
+
+        try {
+          const response = await fetch("https://hc4tw3wom27ltjls6ojjn5xgvq0flonj.lambda-url.us-east-1.on.aws/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          const result = await response.json();
+          if (response.status === 200) {
+            alert("✅ อัปเดตสถานะสำเร็จ");
+            localStorage.removeItem("selectedActivity");
+            window.location.href = "Pending_Advisor.html";
+          } else {
+            alert(result.message || "❌ ไม่สามารถอัปเดตได้");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("❌ เกิดข้อผิดพลาด");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const activity = JSON.parse(localStorage.getItem("selectedActivity") || "{}");
-    if (activity) {
-      document.getElementById("studentName").value = activity.UserID || "-";
-      document.getElementById("activityName").value = activity.ActivityName || "-";
-      document.getElementById("activityDate").value = activity.Date || "-";
-    }
-
-    document.getElementById("advisorForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const status = document.querySelector("input[name='status']:checked")?.value;
-      if (!status) {
-        alert("กรุณาเลือกสถานะการอนุมัติ");
-        return;
-      }
-
-      const payload = {
-        ActivityID: activity.ActivityID,
-        Status: status,
-        ApprovedBy: "อาจารย์ตัวอย่าง", // หรือใช้ชื่อจาก session
-        Note: document.getElementById("advisorNote").value || ""
-      };
-
-      try {
-        const response = await fetch("https://hc4tw3wom27ltjls6ojjn5xgvq0flonj.lambda-url.us-east-1.on.aws/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-        if (response.status === 200) {
-          alert("อัปเดตสถานะสำเร็จ");
-          localStorage.removeItem("selectedActivity");
-          window.location.href = "Pending_Advisor.html";
-        } else {
-          alert(result.message || "❌ ไม่สามารถอัปเดตได้");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("❌ เกิดข้อผิดพลาด");
-      }
-    });
-  });
-</script>
