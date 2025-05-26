@@ -1,7 +1,8 @@
 # SkillSync: EC2 Deployment Guide
 
 This guide explains how to deploy the SkillSync web application (Frontend + Backend Node.js) on an Amazon EC2 instance.
-
+[▶️ วิดีโอแนะนำการใช้งานระบบ](https://www.youtube.com/watch?v=XXXXXXXXXXX)
+[📦 ดาวน์โหลดระบบ SkillSync (ZIP)](https://your-s3-bucket.s3.amazonaws.com/SkillSync.zip)
 ---
 
 ## ✅ Prerequisites
