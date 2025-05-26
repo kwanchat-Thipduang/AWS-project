@@ -6,103 +6,97 @@
   <link rel="stylesheet" href="../CSS/dashboard.css" />
   <link rel="stylesheet" href="../CSS/StudentForm.css" />
   <title>เพิ่มกิจกรรม - SkillSync</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
 </head>
 <body>
-  <!-- Navbar -->
   <nav>
     <div class="logo">
       <img src="../SkillSync.png" alt="logo" class="logo-img" />
     </div>
     <div class="nav-links">
-      <a href="../HTML/student.html"class="active">กิจกรรม</a>
+      <a href="../HTML/student.html">กิจกรรม</a>
       <a href="../HTML/dashboard.html">Dashboard</a>
       <a href="../HTML/Pending.html">รออนุมัติ</a>
-      <a href="#" onclick="openPopup(event)">
-        <img src="../user-icon.png" alt="user" class="user-icon" />
-      </a>
     </div>
   </nav>
 
-  <!-- Main form section -->
   <main>
     <div class="form-container">
       <h2>แบบฟอร์มกรอกข้อมูลกิจกรรม</h2>
-      <form id="activityForm" method="post" enctype="multipart/form-data">
+      <form id="activityForm">
         <input type="text" name="activity_name" id="activity_name" placeholder="ชื่อกิจกรรม" required />
-        <input type="date" name="activity_date" id="activity_date" placeholder="วันที่" required />
+        <input type="date" name="activity_date" id="activity_date" required />
         <input type="number" name="activity_hours" id="activity_hours" placeholder="จำนวนชั่วโมงที่ใช้" required />
-        <input type="text" name="activity_feedback" placeholder="ความคิดเห็นหรือสิ่งที่ได้เรียนรู้จากกิจกรรม" />
-        <label for="evidence">แนบหลักฐาน (เช่น ไฟล์รูป/ใบประกาศ)</label>
-        <input type="file" name="activity_file" placeholder="แนบหลักฐาน (เช่น ไฟล์รูป/ใบประกาศ)" />
+        <input type="text" name="Description_ativity" id="Description_ativity" placeholder="รายละเอียด" required />
+        <input type="text" name="department" id="department" placeholder="หน่วยงานที่จัดกิจกรรม" />
+        <input type="text" name="hardskill" id="hardskill" placeholder="Hard Skill ที่ได้" />
+        <input type="text" name="softskill" id="softskill" placeholder="Soft Skill ที่ได้" />
+        <input type="text" name="activity_feedback" id="activity_feedback" placeholder="ความคิดเห็นหรือสิ่งที่ได้เรียนรู้" />
         <button type="submit">บันทึกกิจกรรม</button>
       </form>
     </div>
   </main>
 
-  <!-- Popup user profile -->
-  <div class="popup-overlay" id="profilePopup">
-    <div class="popup-content">
-      <h3>ข้อมูลส่วนตัว</h3>
-      <p><strong>ชื่อ:</strong> สมชาย ตัวอย่าง</p>
-      <p><strong>คณะ:</strong> วิศวกรรมศาสตร์</p>
-      <p><strong>สาขา:</strong> วิศวกรรมคอมพิวเตอร์</p>
-      <p><strong>เบอร์ติดต่อ:</strong> 081-234-5678</p>
-      <p><strong>ชั่วโมงกิจกรรม:</strong> 45 ชั่วโมง</p>
-      <button onclick="closePopup()">ปิด</button>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/uuid@9.0.0/dist/umd/uuidv4.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const activity = JSON.parse(localStorage.getItem("selectedActivity") || "{}");
-    if (activity && activity.ActivityName) {
-      document.querySelector("input[name='activity_name']").value = activity.ActivityName || "";
-      document.querySelector("input[name='activity_date']").value = activity.Date || "";
-      document.querySelector("input[name='activity_hours']").value = activity.Hours || "";
-    }
-
-    const form = document.querySelector("form");
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const user = JSON.parse(localStorage.getItem("userProfile") || "{}");
-      if (!user.UserID) {
-        alert("❌ กรุณาเข้าสู่ระบบใหม่");
-        return;
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const activity = JSON.parse(localStorage.getItem("selectedActivity") || "{}");
+      if (activity) {
+        document.getElementById("activity_name").value = activity.ActivityName || "";
+        document.getElementById("activity_date").value = activity.Date || "";
+        document.getElementById("activity_hours").value = activity.Hours || "";
+        document.getElementById("Description_ativity").value = activity.Description || "";
+        document.getElementById("department").value = activity.Department || "";
+        document.getElementById("hardskill").value = activity.Hardskill || "";
+        document.getElementById("softskill").value = activity.Softskill || "";
+        document.getElementById("activity_feedback").value = activity.activity_feedback || "";
       }
 
-      const payload = {
-        UserID: user.UserID,
-        ActivityName: document.querySelector("input[name='activity_name']").value,
-        Date: document.querySelector("input[name='activity_date']").value,
-        Hours: parseInt(document.querySelector("input[name='activity_hours']").value),
-        Description: document.querySelector("input[name='activity_feedback']").value || "-",
-        Department: "-",     // ไม่แสดงใน UI นี้
-        Hardskill: "-",      // ไม่แสดงใน UI นี้
-        Softskill: "-"       // ไม่แสดงใน UI นี้
-      };
+      const form = document.getElementById("activityForm");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      try {
-        const response = await fetch("https://wtcvrfkivggyjbb7bpgqccdvhq0ifmtc.lambda-url.us-east-1.on.aws/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-        if (response.status === 201) {
-          alert("✅ ส่งกิจกรรมสำเร็จ รออาจารย์อนุมัติ");
-          localStorage.removeItem("selectedActivity");
-          window.location.href = "dashboard.html";
-        } else {
-          alert(result.message || "❌ ไม่สามารถส่งกิจกรรมได้");
+        const user = JSON.parse(localStorage.getItem("userProfile") || "{}");
+        if (!user.UserID) {
+          alert("❌ กรุณาเข้าสู่ระบบใหม่");
+          return;
         }
-      } catch (err) {
-        console.error(err);
-        alert("❌ เกิดข้อผิดพลาด");
-      }
+
+        const payload = {
+          UserID: user.UserID,
+          ActivityID: uuid.v4(),
+          ActivityName: document.getElementById("activity_name").value.trim(),
+          Date: document.getElementById("activity_date").value,
+          Hours: parseInt(document.getElementById("activity_hours").value),
+          Description: document.getElementById("Description_ativity").value.trim(),
+          Department: document.getElementById("department").value.trim(),
+          Hardskill: document.getElementById("hardskill").value.trim(),
+          Softskill: document.getElementById("softskill").value.trim(),
+          activity_feedback: document.getElementById("activity_feedback").value.trim()
+        };
+
+        console.log("📦 Payload ที่จะส่ง:", payload);
+
+        try {
+          const response = await fetch("https://wtcvrfkivggyjbb7bpgqccdvhq0ifmtc.lambda-url.us-east-1.on.aws/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          const result = await response.json();
+          if (response.status === 201) {
+            alert("✅ ส่งกิจกรรมสำเร็จ รออาจารย์อนุมัติ");
+            localStorage.removeItem("selectedActivity");
+            window.location.href = "Pending.html";
+          } else {
+            alert(result.message || "❌ ไม่สามารถส่งกิจกรรมได้");
+          }
+        } catch (err) {
+          console.error("❌ ERROR:", err);
+          alert("❌ เกิดข้อผิดพลาดในการเชื่อมต่อ");
+        }
+      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>

@@ -68,7 +68,7 @@
           div.className = "activity-item";
           div.innerHTML = `
             <p><strong>ชื่อกิจกรรม:</strong> ${activity.ActivityName || '-'}</p>
-            <p><strong>คำอธิบาย:</strong> ${activity.Description || '-'}</p>
+            <p><strong>รายละเอียด:</strong> ${activity.Description || activity.Description_ativity || '-'}</p>
             <p><strong>วันที่จัด:</strong> ${activity.Date || '-'}</p>
             <p><strong>หน่วยงาน:</strong> ${activity.Department || '-'}</p>
             <p><strong>Hard Skill:</strong> ${activity.Hardskill || '-'}</p>

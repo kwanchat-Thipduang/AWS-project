@@ -16,11 +16,6 @@
       <form onsubmit="event.preventDefault(); login();">
         <input type="text" id="username" placeholder="ชื่อผู้ใช้" required />
         <input type="password" id="password" placeholder="รหัสผ่าน" required />
-        <select id="type" required>
-          <option value="Student">Student</option>
-          <option value="Advisor">Advisor</option>
-          <option value="Admin">Admin</option>
-        </select>
         <button type="submit">เข้าสู่ระบบ</button>
         <p><a href="../HTML/signup.html">ยังไม่มีบัญชี? สมัครสมาชิก</a></p>
       </form>
@@ -34,58 +29,53 @@
     async function login() {
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
-      const type = document.getElementById("type").value;
 
-      const url = type === "Admin" ? adminApi : userApi;
-
-      const payload = type === "Admin"
-        ? {
+      try {
+        // ลอง login เป็น admin ก่อน
+        let response = await fetch(adminApi, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
             action: "login",
             AdminName: username,
             AdminPassword: password
-          }
-        : {
-            action: "login",
-            UserName: username,
-            UserPassword: password,
-            UserEmail: "placeholder@email.com",
-            StudentID: "0000000000",
-            Faculty: "N/A",
-            Branch: "N/A",
-            PhoneNum: "0000000000",
-            Type: type
-          };
-
-      try {
-        const response = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          })
         });
 
-        const result = await response.json();
+        let result = await response.json();
+        if (result.admin) {
+          alert("✅ Login สำเร็จ (Admin)");
+          return window.location.href = "/HTML/admin_dashboard.html";
+        }
+
+        // ไม่ใช่ admin → ลองเป็น user
+        response = await fetch(userApi, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "login",
+            UserName: username,
+            UserPassword: password
+          })
+        });
+
+        result = await response.json();
         const parsed = result.body ? JSON.parse(result.body) : result;
 
-        if (type === "Admin" && result.admin) {
-          alert("✅ Login สำเร็จ (Admin)");
-          window.location.href = "/HTML/admin_dashboard.html";
-        } else if (parsed.user) {
+        if (parsed.user) {
           localStorage.setItem("userProfile", JSON.stringify(parsed.user));
-          const userType = parsed.user.Type || type;
-          if (userType === "Student") {
-            alert("✅ Login สำเร็จ (Student)");
-            window.location.href = "/HTML/student.html";
-          } else if (userType === "Advisor") {
-            alert("✅ Login สำเร็จ (Advisor)");
-            window.location.href = "/HTML/Pending_Advisor.html";
-          } else {
-            alert("❌ ประเภทผู้ใช้ไม่ถูกต้อง");
+          const type = parsed.user.Type;
+          alert(`✅ Login สำเร็จ (${type})`);
+          if (type === "Student") {
+            return window.location.href = "/HTML/student.html";
+          } else if (type === "Advisor") {
+            return window.location.href = "/HTML/Pending_Advisor.html";
           }
-        } else {
-          alert(parsed.message || result.body || result.error || "❌ เข้าสู่ระบบไม่สำเร็จ");
         }
-      } catch (error) {
-        console.error("Error:", error);
+
+        alert(parsed.message || "❌ ไม่สามารถเข้าสู่ระบบได้");
+      } catch (err) {
+        console.error(err);
         alert("❌ เกิดข้อผิดพลาดขณะเข้าสู่ระบบ");
       }
     }
